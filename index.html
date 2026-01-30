@@ -7467,8 +7467,8 @@
                                 invoiceColIdx = i;
                             }
                         }
-                        // 집하여부
-                        if (pickupColIdx === -1 && ['집하여부', '집하', '픽업'].some(k => h.includes(k))) {
+                        // 집하여부 ('집하일자' 제외)
+                        if (pickupColIdx === -1 && ['집하여부', '픽업'].some(k => h.includes(k)) && !h.includes('일자')) {
                             pickupColIdx = i;
                         }
                         // 주문번호
