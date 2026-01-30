@@ -3309,6 +3309,13 @@
                 return;
             }
 
+            // Firebase 키 유효성 검사
+            if (hasInvalidFirebaseKeyChars(newVendorName)) {
+                alert(getInvalidFirebaseKeyCharsMessage());
+                input.focus();
+                return;
+            }
+
             // 중복 체크
             if (vendorMappings[newVendorName]) {
                 alert('이미 존재하는 발주처입니다.');
@@ -5618,10 +5625,26 @@
         window.deletePackaging = deletePackaging;
 
         // ==================== 거래처 관리 ====================
+
+        // Firebase 키에 사용할 수 없는 문자 검사
+        function hasInvalidFirebaseKeyChars(str) {
+            const invalidChars = /[.#$/\[\]]/;
+            return invalidChars.test(str);
+        }
+
+        function getInvalidFirebaseKeyCharsMessage() {
+            return '발주처 이름에 다음 문자는 사용할 수 없습니다: . # $ / [ ]';
+        }
+
         function handleAddVendor() {
             const name = document.getElementById('new-vendor-name').value.trim();
             if (!name) {
                 showStatus(document.getElementById('mapping-status'), '발주처 이름을 입력해주세요.', 'error');
+                return;
+            }
+
+            if (hasInvalidFirebaseKeyChars(name)) {
+                showStatus(document.getElementById('mapping-status'), getInvalidFirebaseKeyCharsMessage(), 'error');
                 return;
             }
 
@@ -5644,6 +5667,13 @@
             if (newName.trim() === oldName) return;
 
             const trimmedName = newName.trim();
+
+            // Firebase 키 유효성 검사
+            if (hasInvalidFirebaseKeyChars(trimmedName)) {
+                alert(getInvalidFirebaseKeyCharsMessage());
+                return;
+            }
+
             if (vendorMappings[trimmedName]) {
                 alert('이미 존재하는 발주처 이름입니다.');
                 return;
