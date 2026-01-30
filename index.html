@@ -5227,10 +5227,10 @@
         }
 
         // 합포장 처리 함수
-        // 포장방법이 "단품" 또는 "이동갈비"이고 수량이 2개 이상인 경우
+        // 포장방법이 "단품" 또는 "이동갈비포장"이고 수량이 2개 이상인 경우
         // 상품명을 "{상품명} - {수량}개"로, 수량을 1로 변환
         function applyBundlePackaging(data) {
-            const BUNDLE_PACKAGING_TYPES = ['단품', '이동갈비'];
+            const BUNDLE_PACKAGING_TYPES = ['단품', '이동갈비포장'];
 
             return data.map(item => {
                 // SKU에서 포장방법 가져오기
