@@ -7536,8 +7536,8 @@
                                 }
                             }
 
-                            // 2순위: 수하인명 + 발송인명 매칭
-                            if (!orderNo && receiverName && senderName) {
+                            // 2순위: 수하인명 + 발송인명 매칭 (주문번호 매칭 실패 시에도 시도)
+                            if (receiverName && senderName) {
                                 const orderReceiverName = (order.receiverName || '').replace('님', '').trim();
                                 const orderSenderName = (order.senderName || '').trim();
                                 const excelReceiverName = receiverName.replace('님', '').trim();
@@ -7553,8 +7553,8 @@
                                 }
                             }
 
-                            // 3순위: 발송인연락처 + 수하인명 매칭
-                            if (!orderNo && !senderName && senderPhone && receiverName) {
+                            // 3순위: 발송인연락처 + 수하인명 매칭 (발송인명 없을 때)
+                            if (!senderName && senderPhone && receiverName) {
                                 const orderReceiverName = (order.receiverName || '').replace('님', '').trim();
                                 const excelReceiverName = receiverName.replace('님', '').trim();
                                 const orderPhone = (order.senderPhone || '').replace(/-/g, '').trim();
